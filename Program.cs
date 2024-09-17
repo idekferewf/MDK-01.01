@@ -10,7 +10,7 @@ namespace test
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hi, i'm idekferewf!");
+            Console.WriteLine("Hi, i'm idekferewf!!!");
         }
     }
 }
