@@ -15,6 +15,10 @@ namespace MySqlSimpleTest
         public MainForm()
         {
             InitializeComponent();
+
+            MySQLUsersReader reader = new MySQLUsersReader();
+            List<User> users = reader.ReadUsers();
+            dataGridView1.DataSource = users;
         }
     }
 }
