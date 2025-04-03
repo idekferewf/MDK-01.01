@@ -6,18 +6,38 @@ namespace MySqlSimpleTest
 {
     public class MySQLUsersReader
     {
-        public List<User> ReadUsers()
-        {
-            List<User> result = new List<User>();
+        private string myConnectionString = "server=127.0.0.1;uid=root;pwd=vertrigo;database=my_vk_network;";
 
-            string myConnectionString = "server=127.0.0.1;uid=root;pwd=vertrigo;database=my_vk_network;";
+        public bool DeleteUser(string login)
+        {
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(myConnectionString))
                 {
                     conn.Open();
+                    string query = $"DELETE FROM users WHERE login = '{login}';";
+                    MySqlCommand command = new MySqlCommand(query, conn);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            return true;
+        }
 
-                    const string query = "SELECT login, password, fio, age, birth_date, email FROM users;";
+        public List<User> ReadUsers()
+        {
+            List<User> result = new List<User>();
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(myConnectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT login, password, fio, age, birth_date, email FROM users;";
                     MySqlCommand command = new MySqlCommand(query, conn);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -41,7 +61,6 @@ namespace MySqlSimpleTest
                 MessageBox.Show(ex.Message);
                 return result;
             }
-
             return result;
         }
     }
