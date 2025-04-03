@@ -28,34 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.usersGridView = new System.Windows.Forms.DataGridView();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.addUserButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // usersGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 13);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(638, 263);
-            this.dataGridView1.TabIndex = 0;
+            this.usersGridView.AllowUserToAddRows = false;
+            this.usersGridView.AllowUserToDeleteRows = false;
+            this.usersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.usersGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.usersGridView.Location = new System.Drawing.Point(0, 61);
+            this.usersGridView.Name = "usersGridView";
+            this.usersGridView.ReadOnly = true;
+            this.usersGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.usersGridView.Size = new System.Drawing.Size(800, 389);
+            this.usersGridView.TabIndex = 0;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteButton.Location = new System.Drawing.Point(12, 13);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(176, 42);
+            this.deleteButton.TabIndex = 1;
+            this.deleteButton.Text = "Удалить";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // addUserButton
+            // 
+            this.addUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addUserButton.Location = new System.Drawing.Point(194, 13);
+            this.addUserButton.Name = "addUserButton";
+            this.addUserButton.Size = new System.Drawing.Size(176, 42);
+            this.addUserButton.TabIndex = 2;
+            this.addUserButton.Text = "Добавить";
+            this.addUserButton.UseVisualStyleBackColor = true;
+            this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.addUserButton);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.usersGridView);
             this.Name = "MainForm";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Text = "Список пользователей";
+            ((System.ComponentModel.ISupportInitialize)(this.usersGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView usersGridView;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button addUserButton;
     }
 }
 
