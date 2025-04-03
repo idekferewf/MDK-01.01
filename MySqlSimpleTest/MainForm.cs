@@ -13,7 +13,8 @@ namespace MySqlSimpleTest
     public partial class MainForm: Form
     {
         private MySQLUsersReader mySQLUsersReader_;
-
+        private BindingList<User> users_;
+             
         public MainForm()
         {
             InitializeComponent();
@@ -28,8 +29,8 @@ namespace MySqlSimpleTest
 
         private void FillUsersFromDatabase()
         {
-            List<User> users = mySQLUsersReader_.ReadUsers();
-            usersGridView.DataSource = users;
+            users_ = new BindingList<User>(mySQLUsersReader_.ReadUsers());
+            usersGridView.DataSource = users_;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -44,7 +45,7 @@ namespace MySqlSimpleTest
                 if (isDeleted)
                 {
                     // заполняем заново таблицу
-                    FillUsersFromDatabase();
+                    users_.Remove(user);
 
                     // выводим сообщение об успехе
                     MessageBox.Show("Пользователь успешно удалён.", "Успех");
@@ -55,7 +56,19 @@ namespace MySqlSimpleTest
         private void addUserButton_Click(object sender, EventArgs e)
         {
             AddUserForm addUserForm = new AddUserForm();
-            addUserForm.Show();
+            if (addUserForm.ShowDialog() == DialogResult.OK)
+            {
+                // добавляем пользователя в базу данных
+                bool isAdded = mySQLUsersReader_.AddUser(addUserForm.user);
+                if (isAdded)
+                {
+                    // выводим сообщения об успехе
+                    MessageBox.Show($"Пользователь «{addUserForm.user.Login}» успешно добавлен!", "Успех");
+
+                    // добавляем пользователя в таблицу
+                    users_.Add(addUserForm.user);
+                }
+            }
         }
     }
 }
